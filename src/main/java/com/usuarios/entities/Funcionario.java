@@ -65,18 +65,13 @@ public class Funcionario {
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
-//    @NotNull
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "funcionario_permissao",
-//            joinColumns = @JoinColumn(name = "id_funcionario"),
-//            inverseJoinColumns = @JoinColumn(name = "id_permissao"))
-//    private List<Permissao> permissoes;
 
     @Column(name = "data_cadastro", updatable = false)
     private Instant dataCadastro;
 
     @Column(name = "data_atualizacao")
     private Instant dataAtualizacao;
+
 
     @PrePersist
     public void onInsert() {
@@ -87,5 +82,7 @@ public class Funcionario {
     public void onUpdate() {
         this.dataAtualizacao = Instant.now();
     }
+
+
 
 }

@@ -30,7 +30,7 @@ public class EmpresaService {
     }
 
     public Empresa cadastrar(Empresa empresa){
-        empresa.setSenha(passwordEncoder.encode(empresa.getSenha()));
+//        empresa.setSenha(passwordEncoder.encode(empresa.getSenha()));
         return empresaRepository.save(empresa);
     }
 
@@ -41,7 +41,7 @@ public class EmpresaService {
     }
 
     public void deletar(Long id){
-        this.buscarPorId(id);
+//        this.buscarPorId(id);
         empresaRepository.deleteById(id);
     }
 

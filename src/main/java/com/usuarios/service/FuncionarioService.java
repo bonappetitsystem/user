@@ -36,8 +36,8 @@ public class FuncionarioService {
     }
 
     public Funcionario cadastrar(Funcionario funcionario){
-        empresaRepository.findById(funcionario.getEmpresa().getId()).orElseThrow(EmpresaInexistenteOuInativa::new);
-        funcionario.setSenha(passwordEncoder.encode(funcionario.getSenha()));
+//        empresaRepository.findById(funcionario.getEmpresa().getId()).orElseThrow(EmpresaInexistenteOuInativa::new);
+//        funcionario.setSenha(passwordEncoder.encode(funcionario.getSenha()));
         return funcionarioRepository.save(funcionario);
     }
 
@@ -48,7 +48,7 @@ public class FuncionarioService {
     }
 
     public void deletar(Long id){
-        this.buscarPorId(id);
+//        this.buscarPorId(id);
         funcionarioRepository.deleteById(id);
     }
 

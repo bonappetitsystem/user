@@ -16,51 +16,51 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/funcionarios")
-@CrossOrigin(maxAge = 10, origins = "http://localhost:8000")
+//@CrossOrigin(maxAge = 10, origins = "http://localhost:8000")
 public class FuncionarioController {
 
     @Autowired
     private FuncionarioService funcionarioService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_read')")
     public Page<Funcionario> pesquisar(FuncionarioFilter funcionarioFilter, Pageable pageable){
         return funcionarioService.pesquisar(funcionarioFilter, pageable);
     }
 
     @GetMapping(params = "resumo")
-    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_read')")
         public Page<ResumoFuncionario> resumir(FuncionarioFilter funcionarioFilter, Pageable pageable){
         return funcionarioService.resumir(funcionarioFilter, pageable);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_read')")
     public ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(funcionarioService.buscarPorId(id));
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Funcionario> cadastrar(@Valid @RequestBody Funcionario funcionario){
         return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioService.cadastrar(funcionario));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Funcionario> atualizar(@PathVariable Long id, @Valid @RequestBody Funcionario funcionario){
         return ResponseEntity.ok(funcionarioService.atualizar(id, funcionario));
     }
 
     @PutMapping("/{id}/ativo")
-    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Funcionario> atualizarPropriedadeAtivo(@PathVariable Long id, @Valid @RequestBody boolean ativo){
         funcionarioService.atualizarPropriedadeAtivo(id, ativo);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_GERENCIA') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Funcionario> deletar(@PathVariable Long id){
         funcionarioService.deletar(id);
         return ResponseEntity.noContent().build();

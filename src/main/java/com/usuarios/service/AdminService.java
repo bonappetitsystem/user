@@ -30,12 +30,12 @@ public class AdminService {
     }
 
     public Admin cadastrar(Admin admin) {
-        admin.setSenha(passwordEncoder.encode(admin.getSenha()));
+//        admin.setSenha(passwordEncoder.encode(admin.getSenha()));
         return adminRepository.save(admin);
     }
 
     public void deletar(Long id) {
-        buscarPorId(id);
+//        buscarPorId(id);
         adminRepository.deleteById(id);
     }
 
