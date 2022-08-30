@@ -1,9 +1,7 @@
 package com.usuarios.repository.empresa;
 
 import com.usuarios.entities.Empresa;
-import com.usuarios.entities.Empresa_;
 import com.usuarios.entities.Funcionario;
-import com.usuarios.entities.Funcionario_;
 import com.usuarios.repository.Filter.EmpresaFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -44,7 +42,7 @@ public class EmpresaRepositoryImpl implements EmpresaRepositoryQuery{
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Funcionario> criteria = builder.createQuery(Funcionario.class);
         Root<Funcionario> root = criteria.from(Funcionario.class);
-        Predicate idPredicate = builder.equal(root.get(Funcionario_.empresa), id);
+        Predicate idPredicate = builder.equal(root.get("empresa"), id);
         criteria.where(idPredicate);
         TypedQuery<Funcionario> query = manager.createQuery(criteria);
         List<Funcionario> funcionarios = query.getResultList();
@@ -82,14 +80,14 @@ public class EmpresaRepositoryImpl implements EmpresaRepositoryQuery{
         if(!ObjectUtils.isEmpty(empresaFilter.getNomeFantasia())){
             predicates.add(
                     builder.like(
-                            builder.lower(root.get(Empresa_.NOME_FANTASIA)), "%" + empresaFilter.getNomeFantasia().toLowerCase() + "%"
+                            builder.lower(root.get("nomeFantasia")), "%" + empresaFilter.getNomeFantasia().toLowerCase() + "%"
                     ));
         }
 
         if(!ObjectUtils.isEmpty(empresaFilter.getCnpj())){
             predicates.add(
                     builder.like(
-                            builder.lower(root.get(Empresa_.CNPJ)), "%" + empresaFilter.getCnpj().toLowerCase() + "%"
+                            builder.lower(root.get("cnpj")), "%" + empresaFilter.getCnpj().toLowerCase() + "%"
                     ));
 
         }
@@ -97,7 +95,7 @@ public class EmpresaRepositoryImpl implements EmpresaRepositoryQuery{
         if(!ObjectUtils.isEmpty(empresaFilter.getRazaoSocial())){
             predicates.add(
                     builder.like(
-                            builder.lower(root.get(Empresa_.RAZAO_SOCIAL)), "%" + empresaFilter.getRazaoSocial().toLowerCase() + "%"
+                            builder.lower(root.get("razaoSocial")), "%" + empresaFilter.getRazaoSocial().toLowerCase() + "%"
                     ));
         }
 

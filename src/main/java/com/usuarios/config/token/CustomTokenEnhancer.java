@@ -29,7 +29,7 @@ public class CustomTokenEnhancer implements TokenEnhancer {
 
         }
 
-        if(!ObjectUtils.isEmpty(usuarioSistema.getFuncionario())){
+        else if(!ObjectUtils.isEmpty(usuarioSistema.getFuncionario())){
             addInfo.put("id", usuarioSistema.getFuncionario().getId());
             addInfo.put("nome", usuarioSistema.getFuncionario().getNome());
             addInfo.put("cpf", usuarioSistema.getFuncionario().getCpf());

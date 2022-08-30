@@ -18,8 +18,8 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     public Page<Empresa> pesquisar(EmpresaFilter empresaFilter, Pageable pageable){
         return empresaRepository.filtrar(empresaFilter, pageable);

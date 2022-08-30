@@ -1,6 +1,7 @@
 package com.usuarios.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -71,6 +72,7 @@ public class Funcionario {
 
     @Column(name = "data_atualizacao")
     private Instant dataAtualizacao;
+
 
 
     @PrePersist

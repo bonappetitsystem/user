@@ -10,25 +10,32 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithSecurityContext;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityNotFoundException;
 
 import java.time.LocalDate;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(webClientEnabled = false)
+@WithMockUser
 public class FuncionarioControllerTest {
 
 
@@ -51,18 +58,19 @@ public class FuncionarioControllerTest {
     void setup() {
         idExistente = 1L;
         idNaoExistente = 100L;
+
         fNova = new Funcionario();
         fExistente = new Funcionario();
-        fExistente.setId(1L);
         fExistente.setNome("João");
         fExistente.setCpf("12345678910");
         fExistente.setDataNascimento(LocalDate.of(1990, 1, 1));
         fExistente.setMatricula("123456");
-        fExistente.setPerfil(Perfil.ADMIN);
+        fExistente.setPerfil(Perfil.GERENCIA);
         fExistente.setSenha("123456");
         fExistente.setGenero(Genero.MASCULINO);
         fExistente.setEmpresa(new Empresa());
         fExistente.setAtivo(true);
+        fExistente.setId(1L);
 
 
         Mockito.when(funcionarioService.buscarPorId(idExistente)).thenReturn(fExistente);
@@ -81,8 +89,10 @@ public class FuncionarioControllerTest {
                 .accept(MediaType.APPLICATION_JSON));
 
         result.andExpect(status().isOk());
-//        result.andExpect(jsonPath("$.id").value(idExistente));
     }
+
+
+
 
     @Test
     public void buscarPorIdDeveRetornarNotFoundQuandoIdNaoExistir() throws Exception {

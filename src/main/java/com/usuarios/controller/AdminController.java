@@ -19,38 +19,38 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_read')")
     public List<Admin> buscarTodos() {
         return adminService.buscarTodos();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Admin> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.buscarPorId(id));
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Admin> salvar(@Valid @RequestBody Admin admin) {
         return ResponseEntity.status(HttpStatus.CREATED).body(adminService.cadastrar(admin));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Admin> atualizar(@PathVariable Long id, @Valid @RequestBody Admin admin) {
         return ResponseEntity.ok(adminService.atualizar(id, admin));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         adminService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/ativo")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN') and hasAuthority('SCOPE_write')")
     public ResponseEntity<Admin> atualizarPropriedateAtivo(@PathVariable Long id, @RequestBody Boolean ativo) {
         return ResponseEntity.ok(adminService.atualizarPropriedateAtivo(id, ativo));
     }

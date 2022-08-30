@@ -1,7 +1,6 @@
 package com.usuarios.repository.funcionario;
 
 import com.usuarios.entities.Funcionario;
-import com.usuarios.entities.Funcionario_;
 import com.usuarios.repository.projection.ResumoFuncionario;
 import com.usuarios.repository.Filter.FuncionarioFilter;
 import org.springframework.data.domain.Page;
@@ -44,14 +43,14 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepositoryQuery{
         Root<Funcionario> root = criteria.from(Funcionario.class);
 
         criteria.select(builder.construct(ResumoFuncionario.class,
-                root.get(Funcionario_.ID),
-                root.get(Funcionario_.NOME),
-                root.get(Funcionario_.CPF),
-                root.get(Funcionario_.GENERO).as(String.class),
-                root.get(Funcionario_.DATA_NASCIMENTO),
-                root.get(Funcionario_.PERFIL).as(String.class),
-                root.get(Funcionario_.MATRICULA),
-                root.get(Funcionario_.DATA_CADASTRO)));
+                root.get("id"),
+                root.get("nome"),
+                root.get("cpf"),
+                root.get("genero").as(String.class),
+                root.get("dataNascimento"),
+                root.get("perfil").as(String.class),
+                root.get("matricula"),
+                root.get("dataCadastro")));
 
         Predicate[] predicates =  createRestrictions(funcionarioFilter, builder, root);
         criteria.where(predicates);
